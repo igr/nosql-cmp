@@ -36,11 +36,11 @@ const url = 'mongodb://localhost:27017';
 const insertJsonFile = async function(db, file, collectionName) {
   console.log("Importing " + collectionName);
 
-  const users = JSON.parse(fs.readFileSync(datasetPath + file, 'utf8'));
+  const data = JSON.parse(fs.readFileSync(datasetPath + file, 'utf8'));
   const collection = db.collection(collectionName);
 
   try {
-    let result = await collection.insertMany(users);
+    let result = await collection.insertMany(data);
     console.log("Inserted " + file + ": " + result.result.n);
   }
   catch (err) {
