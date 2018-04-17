@@ -1,0 +1,10 @@
+{
+  "name": "dataset",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "random-js": "^1.0.8"
+  },
+  "devDependencies": {},
+  "author": ""
+}
