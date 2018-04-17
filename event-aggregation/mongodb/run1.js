@@ -28,6 +28,7 @@ const url = 'mongodb://localhost:27017';
             email: "$metadata.emailAddress",
             type: "$type",
           },
+          //createdAt: { $first: "$createdAt" },  // a trick how to blind copy objects property
           typeCount: {"$sum": 1},
         }
       },
@@ -63,7 +64,9 @@ const url = 'mongodb://localhost:27017';
             as: "user"
           }
       },
-    ]).toArray();
+    ], {
+      allowDiskUse: true
+    }).toArray();
 
     console.timeEnd('operation');
     console.log("Total fetched records: " + docs.length);
