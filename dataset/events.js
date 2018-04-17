@@ -48,6 +48,10 @@ while(totalEvents > 0) {
   events.push(event);
 
 	timestamp = timestamp + delta + random.real(-fuzzyDelta, fuzzyDelta);
+	timestamp = Math.round(timestamp);
+
+	console.log(new Date(timestamp));
+
 	totalEvents = totalEvents - 1;
 }
 
