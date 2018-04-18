@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+
+  mysql:
+    image: mysql
+    restart: always
+    volumes:
+      - dbdata:/var/lib/mysql
+      - .:/docker-entrypoint-initdb.d/
+    environment:
+      MYSQL_DATABASE: wedb
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root!
+    ports:
+      - 3306:3306
+
+  adminer:
+    depends_on:
+      - mysql
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  dbdata:
