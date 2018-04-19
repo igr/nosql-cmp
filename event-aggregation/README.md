@@ -18,7 +18,13 @@ For example:
 |email 1 | 20      | 30             |
 |email 2 | 22      | 27             |
 
-## Scenario 2
+### Results
+
++ ArangoDB and MySQL performs fast.
++ Had an issue to figure out how to do things in ArangoDB.
++ MongoDb was intuitive.
++ MongoDB performs slower then ArangoDB and MySQL
++ Didn't know how to use influxdb.
 
 
 
