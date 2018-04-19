@@ -5,20 +5,16 @@ const db = new arangojs.Database('http://127.0.0.1:8529');
 
 console.time("operation");
 
-db.query(aqlQuery`
-FOR event IN events
+db.query(aqlQuery` 
+FOR a in (FOR event IN events
   COLLECT
-    email = event.metadata.emailAddress,
+    emailAddress = event.metadata.emailAddress,
     type = event.type WITH COUNT INTO count
-  SORT null
-  LIMIT 10
-  RETURN { 
-      email,
-      s: {
-        type,
-        count
-      }
-  }
+  COLLECT email = emailAddress INTO perUser KEEP type, count
+  RETURN MERGE(PUSH(perUser[* RETURN {[LOWER(CURRENT.type)]: CURRENT.count}], {email})))
+SORT a.create desc
+LIMIT 10
+RETURN a
 `).then(
   cursor => cursor.all()
   ).then(
